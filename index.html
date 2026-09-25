@@ -8,19 +8,19 @@
 <meta property="og:title" content="Dewan — I fix the sites that won't load">
 <meta property="og:description" content="WordPress &amp; WooCommerce fixes, malware cleanup, customization and monthly site care.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#12263A">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2312263A'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='%23fff' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#040806">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23040806'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='%2352FE9A' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
 :root{
-  --bg:#FFFFFF; --soft:#EEF4F5; --chip:#DCE7EA; --line:#D3DFE3;
-  --ink:#12263A; --ink-2:#1F3A52; --muted:#4B5F6E;
-  --accent:#0E7C7B; --accent-hover:#0A5F5E;
-  --d-accent:#6FD1C9; --d-muted:#B8C7D3; --d-faint:#9FB3C3; --d-line:#2E4A63; --t-line:#24405A;
-  --hero-bg:#E8F3F2; --hero-glow:rgba(14,124,123,.14);
-  --ok:#7FD1A8; --err:#FF9B85;
+  --bg:#040806; --soft:#08120D; --panel:#06100B; --raised:#0B1D15; --chip:#0F2419; --line:#143424;
+  --ink:#EAFEF2; --ink-2:#A6BBB0; --muted:#84A094;
+  --accent:#52FE9A; --accent-hover:#86FFBA; --on-accent:#03120A;
+  --d-accent:#52FE9A; --d-muted:#A6BBB0; --d-faint:#84A094; --d-line:#143424; --t-line:#143424;
+  --hero-bg:#0B1D15; --hero-glow:rgba(82,254,154,.09);
+  --ok:#52FE9A; --err:#FF8A7A;
   --serif:'Poppins',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
   --sans:'Poppins',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
   --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
@@ -43,19 +43,19 @@ h1,h2,h3,p,figure,blockquote{margin:0}
 .dark .label{color:var(--d-accent)}
 .h2{font-family:var(--serif);font-weight:600;font-size:clamp(32px,3.6vw,50px);line-height:1.12;letter-spacing:-.02em}
 .skip{position:absolute;left:-9999px;top:0}
-.skip:focus{left:16px;top:16px;z-index:10;background:var(--ink);color:#fff;padding:10px 16px;border-radius:8px}
+.skip:focus{left:16px;top:16px;z-index:10;background:var(--raised);color:var(--ink);padding:10px 16px;border-radius:8px}
 
 /* Buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:999px;text-decoration:none;font-weight:500;font-size:17px;transition:background-color .15s,color .15s,border-color .15s}
-.btn-primary{background:var(--accent);color:#fff;font-weight:600}
-.btn-primary:hover{background:var(--accent-hover);color:#fff}
-.btn-outline{border:1px solid var(--ink);color:var(--ink)}
-.btn-outline:hover{background:var(--ink);color:#fff}
-.btn-dark{background:var(--ink);color:#fff;min-height:44px;padding:0 22px;font-size:16px}
-.btn-dark:hover{background:var(--ink-2);color:#fff}
+.btn-primary{background:var(--accent);color:var(--on-accent);font-weight:600;box-shadow:0 0 28px rgba(82,254,154,.22)}
+.btn-primary:hover{background:var(--accent-hover);color:var(--on-accent)}
+.btn-outline{border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-dark{background:transparent;border:1px solid var(--accent);color:var(--accent);min-height:44px;padding:0 22px;font-size:16px}
+.btn-dark:hover{background:var(--accent);color:var(--on-accent)}
 
 /* Header */
-.site-header{border-bottom:1px solid var(--line);background:rgba(255,255,255,.94);position:sticky;top:0;z-index:5;backdrop-filter:saturate(1.2) blur(8px)}
+.site-header{border-bottom:1px solid var(--line);background:rgba(4,8,6,.88);position:sticky;top:0;z-index:5;backdrop-filter:saturate(1.2) blur(8px)}
 .site-header .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:20px}
 .brand{display:flex;align-items:baseline;gap:12px;text-decoration:none;color:var(--ink)}
 .brand-name{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1;letter-spacing:-.01em}
@@ -65,7 +65,7 @@ h1,h2,h3,p,figure,blockquote{margin:0}
 .nav a:not(.btn):hover{color:var(--accent)}
 
 /* Hero */
-.hero{background:radial-gradient(ellipse 60% 70% at 78% 40%,var(--hero-glow),transparent 70%),linear-gradient(180deg,var(--hero-bg) 0%,#F7FAFA 100%);border-bottom:1px solid var(--line)}
+.hero{background:radial-gradient(ellipse 60% 70% at 78% 40%,var(--hero-glow),transparent 70%),linear-gradient(180deg,var(--hero-bg) 0%,var(--bg) 100%);border-bottom:1px solid var(--line)}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:64px;align-items:center;padding-block:72px 104px}
 .hero-copy{display:flex;flex-direction:column;gap:28px}
 .hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(40px,5.2vw,74px);line-height:1.06;letter-spacing:-.03em}
@@ -73,18 +73,19 @@ h1,h2,h3,p,figure,blockquote{margin:0}
 .hero-lead{font-size:19px;line-height:1.65;color:var(--ink-2);max-width:560px}
 .hero-actions{display:flex;gap:16px;flex-wrap:wrap;padding-top:8px}
 .terminal-wrap{display:flex;flex-direction:column;gap:14px}
-.terminal{background:var(--ink);border-radius:16px;overflow:hidden}
+.terminal{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
 .terminal-bar{display:flex;align-items:center;gap:8px;padding:14px 18px;border-bottom:1px solid var(--t-line)}
-.dot{width:11px;height:11px;border-radius:50%;background:var(--d-line)}
+.dot{width:11px;height:11px;border-radius:50%;background:#FF5F57}
+.dot:nth-child(2){background:#FEBC2E}.dot:nth-child(3){background:var(--accent)}
 .terminal-title{margin-left:10px;font-family:var(--mono);font-size:12px;color:var(--d-faint)}
-.terminal pre{margin:0;padding:22px 22px 26px;font-family:var(--mono);font-size:13.5px;line-height:1.85;color:var(--soft);white-space:pre-wrap;word-break:break-word}
-.t-p{color:var(--ok)}.t-err{color:var(--err)}.t-dim{color:var(--d-faint)}.t-hi{color:#fff}.t-ok{color:var(--ok)}
+.terminal pre{margin:0;padding:22px 22px 26px;font-family:var(--mono);font-size:13.5px;line-height:1.85;color:var(--ink);white-space:pre-wrap;word-break:break-word}
+.t-p{color:var(--ok)}.t-err{color:var(--err)}.t-dim{color:var(--d-faint)}.t-hi{color:var(--ink)}.t-ok{color:var(--ok)}
 .terminal-note{font-size:15px;color:var(--muted)}
 
 /* Trust bar */
 .hero-visual{position:relative;padding-bottom:40px}
-.hero-photo{width:100%;height:auto;border-radius:20px;display:block;box-shadow:0 24px 60px rgba(18,38,58,.18);border:6px solid #fff}
-.hero-visual .terminal{position:absolute;left:-36px;bottom:0;width:min(360px,80%);box-shadow:0 18px 40px rgba(18,38,58,.28)}
+.hero-photo{width:100%;height:auto;border-radius:20px;display:block;box-shadow:0 24px 70px rgba(0,0,0,.55);border:1px solid var(--line)}
+.hero-visual .terminal{position:absolute;left:-36px;bottom:0;width:min(360px,80%);box-shadow:0 18px 50px rgba(0,0,0,.6)}
 .hero-visual .terminal pre{font-size:12.5px;padding:16px 18px 18px;line-height:1.75}
 .trust{border-bottom:1px solid var(--line)}
 .trust .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;padding-block:36px}
@@ -104,11 +105,11 @@ h1,h2,h3,p,figure,blockquote{margin:0}
 .case{display:flex;flex-direction:column;gap:22px;padding:30px;background:var(--soft);border:1px solid var(--line);border-radius:18px}
 .case-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
 .case-num{font-family:var(--mono);font-size:13px;color:var(--muted)}
-.chip{padding:6px 12px;border-radius:999px;background:var(--chip);font-size:13px;font-weight:500}
+.chip{padding:6px 12px;border-radius:999px;background:var(--chip);border:1px solid var(--line);color:var(--accent);font-family:var(--mono);font-size:12px;font-weight:500}
 .case h3{font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.3;letter-spacing:-.01em}
 .shot{display:flex;align-items:center;justify-content:center;aspect-ratio:16/10;border-radius:12px;background:var(--chip);font-family:var(--mono);font-size:13px;color:var(--muted);overflow:hidden}
-.shot.code{background:var(--ink);align-items:flex-start;justify-content:flex-start;aspect-ratio:auto;min-height:200px}
-.shot.code pre{margin:0;padding:18px;font-family:var(--mono);font-size:12.5px;line-height:1.7;color:var(--soft);white-space:pre-wrap;word-break:break-word}
+.shot.code{background:var(--panel);border:1px solid var(--line);align-items:flex-start;justify-content:flex-start;aspect-ratio:auto;min-height:200px}
+.shot.code pre{margin:0;padding:18px;font-family:var(--mono);font-size:12.5px;line-height:1.7;color:var(--ink);white-space:pre-wrap;word-break:break-word}
 .shot img{width:100%;height:100%;object-fit:cover}
 .case dl{margin:0;display:flex;flex-direction:column;gap:16px}
 .case dl div{display:flex;flex-direction:column;gap:4px}
@@ -127,14 +128,14 @@ h1,h2,h3,p,figure,blockquote{margin:0}
 .service li{display:flex;gap:10px}
 .service li::before{content:"—";color:var(--accent)}
 .service-foot{margin-top:auto;padding-top:18px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
-.service.featured{background:var(--ink);color:#fff;border-color:var(--ink)}
+.service.featured{background:var(--raised);color:var(--ink);border-color:rgba(82,254,154,.4);box-shadow:0 0 40px rgba(82,254,154,.08)}
 .service.featured p{color:var(--d-muted)}
 .service.featured li::before{color:var(--d-accent)}
 .service.featured .service-foot{border-top-color:var(--t-line);display:flex;flex-direction:column;gap:4px;color:var(--d-muted)}
-.price{font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.1;color:#fff}
+.price{font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.1;color:var(--accent)}
 
 /* Process */
-.dark{background:var(--ink);color:#fff}
+.dark{background:var(--soft);color:var(--ink);border-block:1px solid var(--line)}
 .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px;list-style:none;margin:0;padding:0}
 .step{display:flex;flex-direction:column;gap:14px;padding-top:24px;border-top:1px solid var(--d-line)}
 .step-num{font-family:var(--mono);font-size:14px;color:var(--d-accent)}
@@ -147,7 +148,7 @@ h1,h2,h3,p,figure,blockquote{margin:0}
 .about-copy{display:flex;flex-direction:column;gap:22px;max-width:720px}
 .about-copy p{font-size:18px;line-height:1.75;color:var(--ink-2)}
 .tags{display:flex;flex-wrap:wrap;gap:10px;padding-top:6px;list-style:none;margin:0;padding-left:0}
-.tags li{padding:8px 14px;border:1px solid var(--line);border-radius:999px;font-family:var(--mono);font-size:13px}
+.tags li{padding:8px 14px;border:1px solid var(--line);color:var(--ink-2);background:var(--panel);border-radius:999px;font-family:var(--mono);font-size:13px}
 
 /* Reviews */
 .reviews{padding-bottom:var(--section)}
@@ -162,39 +163,41 @@ h1,h2,h3,p,figure,blockquote{margin:0}
 .quote figcaption{margin-top:auto;font-size:15px;color:var(--muted)}
 
 /* Free check CTA */
-.cta{background:var(--accent);color:#fff}
+.cta{background:radial-gradient(ellipse 50% 70% at 20% 50%,var(--hero-glow),transparent 70%),var(--raised);color:var(--ink);border-block:1px solid var(--line)}
+.cta h2 .hl{color:var(--accent)}
 .cta .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:72px;padding-block:96px}
 .cta-copy{display:flex;flex-direction:column;gap:20px;max-width:820px}
 .cta h2{font-family:var(--serif);font-weight:600;font-size:clamp(30px,3.8vw,52px);line-height:1.15;letter-spacing:-.02em}
-.cta p{font-size:20px}
+.cta p{font-size:20px;color:var(--ink-2)}
 .cta-alt{font-size:16px!important;opacity:.9}
-.cta-alt a{color:#fff}
-.form{background:#fff;color:var(--ink);border-radius:20px;padding:32px;display:flex;flex-direction:column;gap:16px;box-shadow:0 24px 60px rgba(0,0,0,.18)}
+.cta-alt a{color:var(--accent)}
+.form{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:20px;padding:32px;display:flex;flex-direction:column;gap:16px;box-shadow:0 24px 60px rgba(0,0,0,.45)}
 .field{display:flex;flex-direction:column;gap:6px}
 .field label{font-size:14px;font-weight:500}
 .opt{font-weight:400;color:var(--muted)}
-.field input,.field textarea{font:inherit;font-size:16px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-height:48px;width:100%}
+.field input,.field textarea{font:inherit;font-size:16px;color:var(--ink);background:#030605;border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-height:48px;width:100%}
 .field textarea{resize:vertical;min-height:110px}
-.field input::placeholder,.field textarea::placeholder{color:#8A96A3}
+.field input::placeholder,.field textarea::placeholder{color:#5F7A6C;font-family:var(--mono);font-size:14px}
 .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--hero-glow)}
 .cta .form :focus-visible{outline-color:var(--accent)}
-.btn-submit{background:var(--ink);color:#fff;font-weight:600;border:0;cursor:pointer;width:100%;font-family:inherit}
+.btn-submit{background:var(--accent);color:var(--on-accent);font-weight:600;border:0;cursor:pointer;width:100%;font-family:inherit}
 .btn-submit:hover{background:var(--accent-hover)}
 .btn-submit[disabled]{opacity:.6;cursor:wait}
 .form-status{font-size:15px;margin:0;min-height:1em}
-.form-status.ok{color:#0E7C7B}.form-status.err{color:#B03A2E}
+.form-status.ok{color:var(--accent)}.form-status.err{color:var(--err)}
 .form-status a{color:inherit}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .btn-light{background:#fff;color:var(--ink);font-weight:600;min-height:60px;padding:0 34px;font-size:18px;flex-shrink:0}
 .btn-light:hover{background:var(--soft);color:var(--ink)}
 
 /* Footer */
-.footer{background:var(--ink);color:#fff}
+.footer{background:var(--soft);color:var(--ink);border-top:1px solid var(--line)}
+.footer h2 .hl{color:var(--accent)}
 .footer .wrap{display:flex;flex-direction:column;gap:64px;padding-block:104px 48px}
 .footer-main{display:flex;justify-content:space-between;gap:80px}
 .footer h2{font-family:var(--serif);font-weight:600;font-size:clamp(34px,4.2vw,58px);line-height:1.1;letter-spacing:-.02em;max-width:620px}
 .contacts{display:flex;flex-direction:column;width:min(520px,100%);list-style:none;margin:0;padding:0}
-.contacts a{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:64px;border-bottom:1px solid var(--d-line);color:#fff;text-decoration:none;font-size:18px}
+.contacts a{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:64px;border-bottom:1px solid var(--d-line);color:var(--ink);text-decoration:none;font-size:18px}
 .contacts a span:first-child{color:var(--d-faint);flex-shrink:0}
 .contacts a span:last-child{text-align:right;overflow-wrap:anywhere;min-width:0}
 .contacts a:hover span:last-child{color:var(--d-accent)}
@@ -511,7 +514,7 @@ create_function() in
 <section class="cta" id="free-check">
   <div class="wrap">
     <div class="cta-copy">
-      <h2>Not sure what's wrong with your site?</h2>
+      <h2>Not sure what's <span class="hl">wrong with your site?</span></h2>
       <p>Send me your URL. I'll check speed, security and anything broken, then send you a short video with the top 3 issues — free, no obligation.</p>
       <p class="cta-alt">Prefer email? Write to <a href="mailto:dewan.imtiaz01@gmail.com">dewan.imtiaz01@gmail.com</a></p>
     </div>
@@ -546,7 +549,7 @@ create_function() in
 <footer class="footer" id="contact">
   <div class="wrap">
     <div class="footer-main">
-      <h2>Let's get your site working.</h2>
+      <h2>Let's get your site <span class="hl">working.</span></h2>
       <ul class="contacts">
         <li><a href="mailto:dewan.imtiaz01@gmail.com"><span>Email</span><span>dewan.imtiaz01@gmail.com</span></a></li>
         <!-- WHATSAPP (hidden until you have the number): replace 8801XXXXXXXXX with your number (880 + number without the leading 0),
