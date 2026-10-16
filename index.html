@@ -294,6 +294,35 @@ h1,h2,h3,p,figure,blockquote{margin:0}
 @media (min-width:1101px){
   .wrap{max-width:none;width:80%;padding-inline:0}
 }
+/* Client sites */
+.site-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.site{display:flex;flex-direction:column;background:var(--soft);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:border-color .2s,transform .2s}
+.site:hover{border-color:rgba(65,208,247,.45);transform:translateY(-3px)}
+.site-frame{display:block;text-decoration:none;color:inherit;margin:14px 14px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+.site-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid var(--line)}
+.site-bar .dot{width:9px;height:9px}
+.site-url{margin-left:8px;font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.site-shot{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--panel)}
+.site-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
+.site-ph{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:20px;
+  background:radial-gradient(ellipse 80% 70% at 85% 10%,rgba(65,208,247,.16),transparent 60%),
+  repeating-linear-gradient(0deg,transparent 0 23px,rgba(65,208,247,.05) 23px 24px),
+  repeating-linear-gradient(90deg,transparent 0 23px,rgba(65,208,247,.05) 23px 24px),var(--raised)}
+.site-ph-name{font-weight:600;font-size:22px;line-height:1.2;color:var(--ink);letter-spacing:-.01em}
+.site-ph-dom{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.site-body{display:flex;flex-direction:column;gap:12px;padding:20px 24px 24px;flex-grow:1}
+.site-meta{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:12px;color:var(--accent)}
+.site-loc{color:var(--muted)}
+.site h3{font-weight:600;font-size:20px;line-height:1.3;letter-spacing:-.01em}
+.site p{font-size:15px;line-height:1.6;color:var(--ink-2)}
+.site-tags{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.site-tags li{padding:5px 11px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-family:var(--mono);font-size:11.5px;color:var(--ink-2)}
+.site-link{margin-top:auto;padding-top:6px;align-self:flex-start;font-weight:500;font-size:15px;color:var(--accent);text-decoration:none}
+.site-link:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offset:4px}
+.site:last-child:nth-child(3n+1){grid-column:2}
+@media (max-width:1100px){.site-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.site:last-child:nth-child(3n+1){grid-column:auto}.site:last-child:nth-child(2n+1){grid-column:1/-1;justify-self:center;width:calc(50% - 14px)}}
+@media (max-width:720px){.site-grid{grid-template-columns:1fr;gap:20px}.site:last-child:nth-child(2n+1){width:auto;justify-self:stretch}.site-body{padding:18px 20px 22px}}
+@media (prefers-reduced-motion:reduce){.site:hover{transform:none}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
 </head>
@@ -432,6 +461,132 @@ create_function() in
         </dl>
       </article>
 
+    </div>
+  </div>
+</section>
+
+<section class="section sites" id="sites">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="stack">
+        <div class="label">Client sites</div>
+        <h2 class="h2">Live sites I've worked on.</h2>
+      </div>
+      <p class="section-note">Real businesses, live right now. Click any screenshot to open the site.</p>
+    </div>
+    <div class="site-grid">
+      <article class="site">
+        <a class="site-frame" href="https://www.lexinter.net/" target="_blank" rel="noopener" aria-label="Visit Lexinter Law Directory (opens in a new tab)">
+          <div class="site-bar" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="site-url">lexinter.net</span></div>
+          <div class="site-shot">
+            <div class="site-ph" aria-hidden="true"><span class="site-ph-name">Lexinter Law Directory</span><span class="site-ph-dom">lexinter.net</span></div>
+            <img src="work/lexinter.jpg" alt="Homepage of Lexinter Law Directory" loading="lazy" onerror="this.remove()">
+          </div>
+        </a>
+        <div class="site-body">
+          <div class="site-meta"><span>Legal directory</span><span class="site-loc">United States</span></div>
+          <h3>Lexinter Law Directory</h3>
+          <p>Free attorney search by practice area and location, plus legal guides and state and federal law texts.</p>
+          <ul class="site-tags"><li>WordPress</li><li>Elementor</li><li>Directory</li></ul>
+          <a class="site-link" href="https://www.lexinter.net/" target="_blank" rel="noopener">Visit live site <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+      <article class="site">
+        <a class="site-frame" href="https://www.halt.org/" target="_blank" rel="noopener" aria-label="Visit Halt Law Directory (opens in a new tab)">
+          <div class="site-bar" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="site-url">www.halt.org</span></div>
+          <div class="site-shot">
+            <div class="site-ph" aria-hidden="true"><span class="site-ph-name">Halt Law Directory</span><span class="site-ph-dom">www.halt.org</span></div>
+            <img src="work/halt.jpg" alt="Homepage of Halt Law Directory" loading="lazy" onerror="this.remove()">
+          </div>
+        </a>
+        <div class="site-body">
+          <div class="site-meta"><span>Legal directory</span><span class="site-loc">St. Paul, MN</span></div>
+          <h3>Halt Law Directory</h3>
+          <p>Attorney directory with practice-area search, paid listing tiers and legal guides.</p>
+          <ul class="site-tags"><li>WordPress</li><li>Elementor</li><li>Paid listings</li></ul>
+          <a class="site-link" href="https://www.halt.org/" target="_blank" rel="noopener">Visit live site <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+      <article class="site">
+        <a class="site-frame" href="https://praxismn.com/" target="_blank" rel="noopener" aria-label="Visit Praxis (opens in a new tab)">
+          <div class="site-bar" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="site-url">praxismn.com</span></div>
+          <div class="site-shot">
+            <div class="site-ph" aria-hidden="true"><span class="site-ph-name">Praxis</span><span class="site-ph-dom">praxismn.com</span></div>
+            <img src="work/praxis.jpg" alt="Homepage of Praxis" loading="lazy" onerror="this.remove()">
+          </div>
+        </a>
+        <div class="site-body">
+          <div class="site-meta"><span>Law firm consulting</span><span class="site-loc">Eagan, MN</span></div>
+          <h3>Praxis</h3>
+          <p>Consulting firm helping new lawyers and small firms with launch, marketing and operations.</p>
+          <ul class="site-tags"><li>WordPress</li><li>Elementor</li></ul>
+          <a class="site-link" href="https://praxismn.com/" target="_blank" rel="noopener">Visit live site <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+      <article class="site">
+        <a class="site-frame" href="https://www.leversonbudke.com/" target="_blank" rel="noopener" aria-label="Visit Leverson Budke (opens in a new tab)">
+          <div class="site-bar" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="site-url">leversonbudke.com</span></div>
+          <div class="site-shot">
+            <div class="site-ph" aria-hidden="true"><span class="site-ph-name">Leverson Budke</span><span class="site-ph-dom">leversonbudke.com</span></div>
+            <img src="work/leversonbudke.jpg" alt="Homepage of Leverson Budke" loading="lazy" onerror="this.remove()">
+          </div>
+        </a>
+        <div class="site-body">
+          <div class="site-meta"><span>Criminal defense law firm</span><span class="site-loc">Eagan, MN</span></div>
+          <h3>Leverson Budke</h3>
+          <p>DWI, criminal defense and estate planning law firm serving St. Paul and the Twin Cities.</p>
+          <ul class="site-tags"><li>WordPress</li><li>Elementor</li></ul>
+          <a class="site-link" href="https://www.leversonbudke.com/" target="_blank" rel="noopener">Visit live site <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+      <article class="site">
+        <a class="site-frame" href="https://rfeconstruction.com/" target="_blank" rel="noopener" aria-label="Visit RFE Construction (opens in a new tab)">
+          <div class="site-bar" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="site-url">rfeconstruction.com</span></div>
+          <div class="site-shot">
+            <div class="site-ph" aria-hidden="true"><span class="site-ph-name">RFE Construction</span><span class="site-ph-dom">rfeconstruction.com</span></div>
+            <img src="work/rfe.jpg" alt="Homepage of RFE Construction" loading="lazy" onerror="this.remove()">
+          </div>
+        </a>
+        <div class="site-body">
+          <div class="site-meta"><span>Roofing &amp; exteriors</span><span class="site-loc">Twin Cities, MN</span></div>
+          <h3>RFE Construction</h3>
+          <p>Roofing and exterior contractor: roofing, siding, gutters and storm-damage repair, with free inspections.</p>
+          <ul class="site-tags"><li>WordPress</li><li>Elementor</li><li>Lead forms</li></ul>
+          <a class="site-link" href="https://rfeconstruction.com/" target="_blank" rel="noopener">Visit live site <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+      <article class="site">
+        <a class="site-frame" href="https://www.rds3pl.com/" target="_blank" rel="noopener" aria-label="Visit RDS 3PL Freight &amp; Logistics (opens in a new tab)">
+          <div class="site-bar" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="site-url">rds3pl.com</span></div>
+          <div class="site-shot">
+            <div class="site-ph" aria-hidden="true"><span class="site-ph-name">RDS 3PL Freight &amp; Logistics</span><span class="site-ph-dom">rds3pl.com</span></div>
+            <img src="work/rds3pl.jpg" alt="Homepage of RDS 3PL Freight &amp; Logistics" loading="lazy" onerror="this.remove()">
+          </div>
+        </a>
+        <div class="site-body">
+          <div class="site-meta"><span>Freight &amp; logistics</span><span class="site-loc">Hudson, WI</span></div>
+          <h3>RDS 3PL Freight &amp; Logistics</h3>
+          <p>Logistics company site covering white-glove delivery, warehousing and kitting, built around quote requests.</p>
+          <ul class="site-tags"><li>WordPress</li><li>Slider Revolution</li><li>Quote forms</li></ul>
+          <a class="site-link" href="https://www.rds3pl.com/" target="_blank" rel="noopener">Visit live site <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+      <article class="site">
+        <a class="site-frame" href="https://cash4junkcarsmn.com/" target="_blank" rel="noopener" aria-label="Visit Cash 4 Junk Cars MN (opens in a new tab)">
+          <div class="site-bar" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="site-url">cash4junkcarsmn.com</span></div>
+          <div class="site-shot">
+            <div class="site-ph" aria-hidden="true"><span class="site-ph-name">Cash 4 Junk Cars MN</span><span class="site-ph-dom">cash4junkcarsmn.com</span></div>
+            <img src="work/cash4junkcars.jpg" alt="Homepage of Cash 4 Junk Cars MN" loading="lazy" onerror="this.remove()">
+          </div>
+        </a>
+        <div class="site-body">
+          <div class="site-meta"><span>Auto recycling</span><span class="site-loc">Twin Cities, MN</span></div>
+          <h3>Cash 4 Junk Cars MN</h3>
+          <p>Lead-generation site for a junk car buyer: free cash quotes, towing and on-the-spot payment.</p>
+          <ul class="site-tags"><li>WordPress</li><li>Lead generation</li></ul>
+          <a class="site-link" href="https://cash4junkcarsmn.com/" target="_blank" rel="noopener">Visit live site <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
     </div>
   </div>
 </section>
