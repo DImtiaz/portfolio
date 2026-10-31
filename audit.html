@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free WordPress Site Audit — Dewan</title>
+<meta name="description" content="Get a free WordPress & WooCommerce site audit: speed, security, SEO, mobile and broken forms or checkout — explained in plain English with the top fixes first.">
+<meta property="og:title" content="Free WordPress site audit — find what's costing you customers">
+<meta property="og:description" content="WordPress &amp; WooCommerce fixes, malware cleanup, customization and monthly site care.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://dimtiaz.github.io/portfolio/audit.html">
+<meta property="og:url" content="https://dimtiaz.github.io/portfolio/audit.html">
+<meta property="og:site_name" content="Dewan Imtiaz">
+<meta property="og:image" content="https://dimtiaz.github.io/portfolio/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Dewan Imtiaz working at his desk">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free WordPress site audit — find what's costing you customers">
+<meta name="twitter:description" content="WordPress &amp; WooCommerce fixes, malware cleanup, customization and monthly site care.">
+<meta name="twitter:image" content="https://dimtiaz.github.io/portfolio/og-image.jpg">
+<meta name="theme-color" content="#040806">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23040806'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='%2341D0F7' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#040806; --soft:#08120D; --panel:#06100B; --raised:#0B1D15; --chip:#0F2419; --line:#143424;
+  --ink:#EAFEF2; --ink-2:#A6BBB0; --muted:#84A094;
+  --accent:#41D0F7; --accent-hover:#7ADFFA; --on-accent:#03120A;
+  --d-accent:#41D0F7; --d-muted:#A6BBB0; --d-faint:#84A094; --d-line:#143424; --t-line:#143424;
+  --hero-bg:#0B1D15; --hero-glow:rgba(65,208,247,.09);
+  --ok:#52FE9A; --err:#FF8A7A;
+  --serif:'Poppins',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  --sans:'Poppins',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  --pad:clamp(22px,6.6vw,96px);
+  --section:clamp(64px,8.5vw,120px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+section[id],footer[id]{scroll-margin-top:84px}
+a{color:var(--ink)}
+a:hover{color:var(--accent-hover)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.dark :focus-visible,.cta :focus-visible{outline-color:var(--d-accent)}
+h1,h2,h3,p,figure,blockquote{margin:0}
+.wrap{max-width:1440px;margin:0 auto;padding-inline:var(--pad)}
+.serif{font-family:var(--serif);font-weight:400}
+.label{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.dark .label{color:var(--d-accent)}
+.h2{font-family:var(--serif);font-weight:600;font-size:clamp(32px,3.6vw,50px);line-height:1.12;letter-spacing:-.02em}
+.skip{position:absolute;left:-9999px;top:0}
+.skip:focus{left:16px;top:16px;z-index:10;background:var(--raised);color:var(--ink);padding:10px 16px;border-radius:8px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:999px;text-decoration:none;font-weight:500;font-size:17px;transition:background-color .15s,color .15s,border-color .15s}
+.btn-primary{background:var(--accent);color:var(--on-accent);font-weight:600;box-shadow:0 0 28px rgba(65,208,247,.22)}
+.btn-primary:hover{background:var(--accent-hover);color:var(--on-accent)}
+.btn-outline{border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-dark{background:transparent;border:1px solid var(--accent);color:var(--accent);min-height:44px;padding:0 22px;font-size:16px}
+.btn-dark:hover{background:var(--accent);color:var(--on-accent)}
+
+/* Header */
+.site-header{border-bottom:1px solid var(--line);background:rgba(4,8,6,.88);position:sticky;top:0;z-index:5;backdrop-filter:saturate(1.2) blur(8px)}
+.site-header .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:20px}
+.brand{display:flex;align-items:baseline;gap:12px;text-decoration:none;color:var(--ink)}
+.brand-name{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1;letter-spacing:-.01em}
+.brand-tag{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.nav{display:flex;align-items:center;gap:36px;font-size:16px}
+.nav a:not(.btn){text-decoration:none}
+.nav a:not(.btn):hover{color:var(--accent)}
+
+/* Hero */
+.hero{background:radial-gradient(ellipse 60% 70% at 78% 40%,var(--hero-glow),transparent 70%),linear-gradient(180deg,var(--hero-bg) 0%,var(--bg) 100%);border-bottom:1px solid var(--line)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:64px;align-items:center;padding-block:72px 104px}
+.hero-copy{display:flex;flex-direction:column;gap:28px}
+.hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(40px,5.2vw,74px);line-height:1.06;letter-spacing:-.03em}
+.hero h1 .hl{color:var(--accent)}
+.hero-lead{font-size:19px;line-height:1.65;color:var(--ink-2);max-width:560px}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;padding-top:8px}
+.terminal-wrap{display:flex;flex-direction:column;gap:14px}
+.terminal{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.terminal-bar{display:flex;align-items:center;gap:8px;padding:14px 18px;border-bottom:1px solid var(--t-line)}
+.dot{width:11px;height:11px;border-radius:50%;background:#FF5F57}
+.dot:nth-child(2){background:#FEBC2E}.dot:nth-child(3){background:var(--accent)}
+.terminal-title{margin-left:10px;font-family:var(--mono);font-size:12px;color:var(--d-faint)}
+.terminal pre{margin:0;padding:22px 22px 26px;font-family:var(--mono);font-size:13.5px;line-height:1.85;color:var(--ink);white-space:pre-wrap;word-break:break-word}
+.t-p{color:var(--ok)}.t-err{color:var(--err)}.t-dim{color:var(--d-faint)}.t-hi{color:var(--ink)}.t-ok{color:var(--ok)}
+.terminal-note{font-size:15px;color:var(--muted)}
+
+/* Trust bar */
+.hero-visual{position:relative;padding-bottom:40px}
+.hero-photo{width:100%;height:auto;border-radius:20px;display:block;box-shadow:0 24px 70px rgba(0,0,0,.55);border:1px solid var(--line)}
+.hero-visual .terminal{position:absolute;left:-36px;bottom:0;width:min(360px,80%);box-shadow:0 18px 50px rgba(0,0,0,.6)}
+.hero-visual .terminal pre{font-size:12.5px;padding:16px 18px 18px;line-height:1.75}
+.trust{border-bottom:1px solid var(--line)}
+.trust .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;padding-block:36px}
+.trust-item{display:flex;flex-direction:column;gap:6px}
+.trust-big{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.1;letter-spacing:-.02em}
+.stars-trust{color:#F1C40F;letter-spacing:2px}
+.trust-small{font-size:15px;color:var(--muted)}
+
+/* Sections */
+.section{padding-block:var(--section)}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:48px;margin-bottom:56px}
+.section-head .stack{display:flex;flex-direction:column;gap:16px}
+.section-note{font-size:16px;color:var(--muted);max-width:340px}
+
+/* Case studies */
+.cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.case{display:flex;flex-direction:column;gap:22px;padding:30px;background:var(--soft);border:1px solid var(--line);border-radius:18px}
+.case-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.case-num{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.chip{padding:6px 12px;border-radius:999px;background:var(--chip);border:1px solid var(--line);color:var(--accent);font-family:var(--mono);font-size:12px;font-weight:500}
+.case h3{font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.3;letter-spacing:-.01em}
+.shot{display:flex;align-items:center;justify-content:center;aspect-ratio:16/10;border-radius:12px;background:var(--chip);font-family:var(--mono);font-size:13px;color:var(--muted);overflow:hidden}
+.shot.code{background:var(--panel);border:1px solid var(--line);align-items:flex-start;justify-content:flex-start;aspect-ratio:auto;min-height:200px}
+.shot.code pre{margin:0;padding:18px;font-family:var(--mono);font-size:12.5px;line-height:1.7;color:var(--ink);white-space:pre-wrap;word-break:break-word}
+.shot img{width:100%;height:100%;object-fit:cover}
+.case dl{margin:0;display:flex;flex-direction:column;gap:16px}
+.case dl div{display:flex;flex-direction:column;gap:4px}
+.case dt{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.case dd{margin:0;font-size:16px;line-height:1.5}
+.case .result{padding-top:14px;border-top:1px solid var(--line)}
+.case .result dd{font-size:18px;line-height:1.4;font-weight:600;color:var(--accent)}
+
+/* Services */
+.services{background:var(--soft);border-block:1px solid var(--line)}
+.service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.service{display:flex;flex-direction:column;gap:22px;padding:36px;border:1px solid var(--line);border-radius:18px;background:var(--bg)}
+.service h3{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.25;letter-spacing:-.01em}
+.service p{font-size:17px;color:var(--ink-2)}
+.service ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:16px}
+.service li{display:flex;gap:10px}
+.service li::before{content:"—";color:var(--accent)}
+.service-foot{margin-top:auto;padding-top:18px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
+.service.featured{background:var(--raised);color:var(--ink);border-color:rgba(65,208,247,.4);box-shadow:0 0 40px rgba(65,208,247,.08)}
+.service.featured p{color:var(--d-muted)}
+.service.featured li::before{color:var(--d-accent)}
+.service.featured .service-foot{border-top-color:var(--t-line);display:flex;flex-direction:column;gap:4px;color:var(--d-muted)}
+.price{font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.1;color:var(--accent)}
+
+/* Process */
+.dark{background:var(--soft);color:var(--ink);border-block:1px solid var(--line)}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px;list-style:none;margin:0;padding:0}
+.step{display:flex;flex-direction:column;gap:14px;padding-top:24px;border-top:1px solid var(--d-line)}
+.step-num{font-family:var(--mono);font-size:14px;color:var(--d-accent)}
+.step h3{font-size:20px;font-weight:600}
+.step p{font-size:16px;line-height:1.6;color:var(--d-muted)}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:80px;align-items:start}
+.about-head{display:flex;flex-direction:column;gap:16px}
+.about-copy{display:flex;flex-direction:column;gap:22px;max-width:720px}
+.about-copy p{font-size:18px;line-height:1.75;color:var(--ink-2)}
+.tags{display:flex;flex-wrap:wrap;gap:10px;padding-top:6px;list-style:none;margin:0;padding-left:0}
+.tags li{padding:8px 14px;border:1px solid var(--line);color:var(--ink-2);background:var(--panel);border-radius:999px;font-family:var(--mono);font-size:13px}
+
+/* Reviews */
+.reviews{padding-bottom:var(--section)}
+.reviews-head{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding-top:72px;border-top:1px solid var(--line);margin-bottom:48px}
+.reviews-head h2{font-family:var(--serif);font-weight:600;font-size:clamp(30px,3.2vw,44px);line-height:1.15;letter-spacing:-.02em}
+.reviews-meta{font-size:16px;color:var(--muted)}
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.quote{display:flex;flex-direction:column;gap:24px;padding:40px;background:var(--soft);border:1px solid var(--line);border-radius:18px}
+.quote blockquote{font-family:var(--serif);font-size:18px;line-height:1.6;font-weight:400}
+.stars{color:#F1C40F;font-size:20px;letter-spacing:3px;line-height:1}
+.stars-lg{font-size:28px;letter-spacing:4px}
+.quote figcaption{margin-top:auto;font-size:15px;color:var(--muted)}
+
+/* Free check CTA */
+.cta{background:radial-gradient(ellipse 50% 70% at 20% 50%,var(--hero-glow),transparent 70%),var(--raised);color:var(--ink);border-block:1px solid var(--line)}
+.cta h2 .hl{color:var(--accent)}
+.cta .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:72px;padding-block:96px}
+.cta-copy{display:flex;flex-direction:column;gap:20px;max-width:820px}
+.cta h2{font-family:var(--serif);font-weight:600;font-size:clamp(30px,3.8vw,52px);line-height:1.15;letter-spacing:-.02em}
+.cta p{font-size:20px;color:var(--ink-2)}
+.cta-alt{font-size:16px!important;opacity:.9}
+.cta-alt a{color:var(--accent)}
+.form{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:20px;padding:32px;display:flex;flex-direction:column;gap:16px;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:14px;font-weight:500}
+.opt{font-weight:400;color:var(--muted)}
+.field input,.field textarea{font:inherit;font-size:16px;color:var(--ink);background:#030605;border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-height:48px;width:100%}
+.field textarea{resize:vertical;min-height:110px}
+.field input::placeholder,.field textarea::placeholder{color:#5F7A6C;font-family:var(--mono);font-size:14px}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--hero-glow)}
+.cta .form :focus-visible{outline-color:var(--accent)}
+.btn-submit{background:var(--accent);color:var(--on-accent);font-weight:600;border:0;cursor:pointer;width:100%;font-family:inherit}
+.btn-submit:hover{background:var(--accent-hover)}
+.btn-submit[disabled]{opacity:.6;cursor:wait}
+.form-status{font-size:15px;margin:0;min-height:1em}
+.form-status.ok{color:var(--accent)}.form-status.err{color:var(--err)}
+.form-status a{color:inherit}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.btn-light{background:#fff;color:var(--ink);font-weight:600;min-height:60px;padding:0 34px;font-size:18px;flex-shrink:0}
+.btn-light:hover{background:var(--soft);color:var(--ink)}
+
+/* Footer */
+.footer{background:var(--soft);color:var(--ink);border-top:1px solid var(--line)}
+.footer h2 .hl{color:var(--accent)}
+.footer .wrap{display:flex;flex-direction:column;gap:64px;padding-block:104px 48px}
+.footer-main{display:flex;justify-content:space-between;gap:80px}
+.footer h2{font-family:var(--serif);font-weight:600;font-size:clamp(34px,4.2vw,58px);line-height:1.1;letter-spacing:-.02em;max-width:620px}
+.contacts{display:flex;flex-direction:column;width:min(520px,100%);list-style:none;margin:0;padding:0}
+.contacts a{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:64px;border-bottom:1px solid var(--d-line);color:var(--ink);text-decoration:none;font-size:18px}
+.contacts a span:first-child{color:var(--d-faint);flex-shrink:0}
+.contacts a span:last-child{text-align:right;overflow-wrap:anywhere;min-width:0}
+.contacts a:hover span:last-child{color:var(--d-accent)}
+.footer-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--d-faint)}
+
+/* Tablet */
+@media (max-width:1100px){
+  .hero .wrap{grid-template-columns:1fr;gap:48px}
+  .hero-visual{max-width:640px}
+  .hero-visual .terminal{left:16px}
+  .trust .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cases,.service-grid{grid-template-columns:1fr;max-width:640px}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .section-head{flex-direction:column;align-items:flex-start;gap:16px}
+  .about-grid{grid-template-columns:1fr;gap:28px}
+  .cta .wrap{grid-template-columns:1fr;gap:36px}
+  .form{max-width:640px}
+  .footer-main{flex-direction:column;gap:40px}
+  .quotes{grid-template-columns:1fr;max-width:640px}
+}
+/* Phone */
+@media (max-width:720px){
+  body{font-size:16px}
+  .nav a:not(.btn){display:none}
+  .brand-tag{display:none}
+  .brand-name{font-size:22px}
+  .site-header .wrap{padding-block:14px}
+  .hero .wrap{padding-block:44px 48px;gap:32px}
+  .hero-copy{gap:22px}
+  .hero-lead{font-size:17px}
+  .hero-actions{flex-direction:column}
+  .hero-actions .btn{width:100%}
+  .hero-visual{padding-bottom:0}
+  .hero-visual .terminal{position:relative;left:auto;bottom:auto;width:auto;margin:-48px 12px 0}
+  .hero-visual .terminal pre{font-size:12px}
+  .trust .wrap{gap:24px 16px;padding-block:28px}
+  .trust-big{font-size:24px}
+  .trust-small{font-size:13px}
+  .section-head{margin-bottom:28px}
+  .label{font-size:11px}
+  .case,.service{padding:22px}
+  .case h3{font-size:20px}
+  .service h3{font-size:22px}
+  .steps{grid-template-columns:1fr;gap:28px}
+  .about-copy p{font-size:16px}
+  .quotes{grid-template-columns:1fr}
+  .quote{padding:24px}
+  .quote blockquote{font-size:17px}
+  .cta .wrap{padding-block:56px}
+  .cta p{font-size:16px}
+  .form{padding:22px}
+  .footer .wrap{padding-block:64px 32px;gap:40px}
+  .contacts a{font-size:15px;min-height:56px}
+}
+/* Desktop and larger: content spans 80% of the screen */
+@media (min-width:1101px){
+  .wrap{max-width:none;width:80%;padding-inline:0}
+}
+/* Client sites */
+.site-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.site{display:flex;flex-direction:column;background:var(--soft);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:border-color .2s,transform .2s}
+.site:hover{border-color:rgba(65,208,247,.45);transform:translateY(-3px)}
+.site-frame{display:block;text-decoration:none;color:inherit;margin:14px 14px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+.site-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid var(--line)}
+.site-bar .dot{width:9px;height:9px}
+.site-url{margin-left:8px;font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.site-shot{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--panel)}
+.site-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
+.site-ph{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:20px;
+  background:radial-gradient(ellipse 80% 70% at 85% 10%,rgba(65,208,247,.16),transparent 60%),
+  repeating-linear-gradient(0deg,transparent 0 23px,rgba(65,208,247,.05) 23px 24px),
+  repeating-linear-gradient(90deg,transparent 0 23px,rgba(65,208,247,.05) 23px 24px),var(--raised)}
+.site-ph-name{font-weight:600;font-size:22px;line-height:1.2;color:var(--ink);letter-spacing:-.01em}
+.site-ph-dom{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.site-body{display:flex;flex-direction:column;gap:12px;padding:20px 24px 24px;flex-grow:1}
+.site-meta{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:12px;color:var(--accent)}
+.site-loc{color:var(--muted)}
+.site h3{font-weight:600;font-size:20px;line-height:1.3;letter-spacing:-.01em}
+.site p{font-size:15px;line-height:1.6;color:var(--ink-2)}
+.site-tags{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.site-tags li{padding:5px 11px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-family:var(--mono);font-size:11.5px;color:var(--ink-2)}
+.site-link{margin-top:auto;padding-top:6px;align-self:flex-start;font-weight:500;font-size:15px;color:var(--accent);text-decoration:none}
+.site-link:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offset:4px}
+.site:last-child:nth-child(3n+1){grid-column:2}
+@media (max-width:1100px){.site-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.site:last-child:nth-child(3n+1){grid-column:auto}.site:last-child:nth-child(2n+1){grid-column:1/-1;justify-self:center;width:calc(50% - 14px)}}
+@media (max-width:720px){.site-grid{grid-template-columns:1fr;gap:20px}.site:last-child:nth-child(2n+1){width:auto;justify-self:stretch}.site-body{padding:18px 20px 22px}}
+@media (prefers-reduced-motion:reduce){.site:hover{transform:none}}
+
+/* Audit page */
+.hero-audit .wrap{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}
+.hero-points{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:16px;color:var(--ink-2)}
+.hero-points li{display:flex;gap:10px}.hero-points li::before{content:"✓";color:var(--accent);font-weight:600}
+.report{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.55)}
+.report-head{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--muted)}
+.report-tag{padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--accent)}
+.scores{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:20px}
+.score{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 6px;border:1px solid var(--line);border-radius:12px;background:var(--soft)}
+.score b{font-size:28px;font-weight:700;line-height:1}
+.score span{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.s-bad{color:var(--err)}.s-mid{color:#FEBC2E}.s-good{color:var(--ok)}
+.issues{list-style:none;margin:0;padding:0 20px 20px;display:flex;flex-direction:column;gap:10px}
+.issues li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--soft);font-size:14px;line-height:1.5}
+.sev{font-family:var(--mono);font-size:11px;padding:3px 8px;border-radius:6px;white-space:nowrap}
+.sev-h{background:rgba(255,138,122,.14);color:var(--err)}.sev-m{background:rgba(254,188,46,.14);color:#FEBC2E}.sev-l{background:rgba(82,254,154,.12);color:var(--ok)}
+.issues small{display:block;color:var(--muted);font-size:13px}
+.report-foot{padding:0 20px 18px;font-size:12px;color:var(--muted);font-family:var(--mono)}
+.checks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.check{display:flex;flex-direction:column;gap:14px;padding:30px;background:var(--soft);border:1px solid var(--line);border-radius:18px}
+.check h3{font-weight:600;font-size:21px;line-height:1.3}
+.check p{font-size:15px;line-height:1.6;color:var(--ink-2)}
+.check ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--ink-2)}
+.check li{display:flex;gap:10px}.check li::before{content:"—";color:var(--accent)}
+.check-ico{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:var(--chip);border:1px solid var(--line);color:var(--accent)}
+.compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.compare-col{padding:32px;border-radius:18px;border:1px solid var(--line);background:var(--soft)}
+.compare-col.good{background:var(--raised);border-color:rgba(65,208,247,.4)}
+.compare-col h3{font-weight:600;font-size:20px;margin-bottom:16px}
+.compare-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;font-size:15px;color:var(--ink-2)}
+.compare-col li{display:flex;gap:10px}
+.compare-col.bad li::before{content:"✕";color:var(--err)}.compare-col.good li::before{content:"✓";color:var(--accent)}
+.faq{display:flex;flex-direction:column;gap:12px;max-width:900px}
+.faq details{border:1px solid var(--line);border-radius:14px;background:var(--soft);padding:0 24px}
+.faq summary{cursor:pointer;list-style:none;padding:20px 0;font-weight:600;font-size:17px;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--accent);font-size:22px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding:0 0 20px;font-size:16px;line-height:1.7;color:var(--ink-2)}
+.field select{font:inherit;font-size:16px;color:var(--ink);background:#030605;border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-height:48px;width:100%}
+.steps-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:720px){.steps-3{grid-template-columns:1fr}}
+.form-note{font-size:13px;color:var(--muted);margin:0}
+@media (max-width:1100px){.hero-audit .wrap{grid-template-columns:1fr}.report{max-width:640px}.checks{grid-template-columns:repeat(2,minmax(0,1fr))}.compare{grid-template-columns:1fr;max-width:640px}}
+@media (max-width:720px){.checks{grid-template-columns:1fr}.scores{grid-template-columns:repeat(2,minmax(0,1fr))}.check,.compare-col{padding:22px}.faq details{padding:0 18px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./">
+      <span class="brand-name">Dewan</span>
+      <span class="brand-tag">/ site rescue &amp; care</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#checks">What's checked</a>
+      <a href="#process">How it works</a>
+      <a href="#results">Results</a>
+      <a href="./">Portfolio</a>
+      <a class="btn btn-dark" href="#audit-form">Get free audit</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero hero-audit" id="top">
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="label">Free WordPress &amp; WooCommerce site audit</div>
+      <h1>Find out what's <span class="hl">costing you customers.</span></h1>
+      <p class="hero-lead">A slow page, a broken form or a hidden security hole can lose you sales for months without anyone noticing. Send me your URL and I'll check your site and send a clear report with the top fixes first.</p>
+      <ul class="hero-points">
+        <li>Speed, security, SEO, mobile and checkout in one report</li>
+        <li>Plain English, ranked by what matters most</li>
+        <li>Free, no obligation — fix it yourself or ask me to</li>
+      </ul>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#audit-form">Get my free audit</a>
+        <a class="btn btn-outline" href="#sample">See a sample report</a>
+      </div>
+    </div>
+    <div class="report" id="sample" role="img" aria-label="Example audit report showing four scores and a list of issues ranked by severity.">
+      <div class="report-head" aria-hidden="true"><span>site-audit · yourstore.com</span><span class="report-tag">Example report</span></div>
+      <div class="scores" aria-hidden="true">
+        <div class="score"><b class="s-bad">42</b><span>Speed</span></div>
+        <div class="score"><b class="s-mid">68</b><span>Security</span></div>
+        <div class="score"><b class="s-mid">74</b><span>SEO</span></div>
+        <div class="score"><b class="s-good">91</b><span>Mobile</span></div>
+      </div>
+      <ul class="issues" aria-hidden="true">
+        <li><span class="sev sev-h">HIGH</span><span>3 plugins out of date, 1 with a known vulnerability<small>Fix: update and replace the abandoned plugin</small></span></li>
+        <li><span class="sev sev-h">HIGH</span><span>Homepage takes 6.8s to load on mobile<small>Fix: compress hero images, enable caching</small></span></li>
+        <li><span class="sev sev-m">MED</span><span>Contact form emails landing in spam<small>Fix: set up SMTP sending</small></span></li>
+        <li><span class="sev sev-l">LOW</span><span>12 pages missing meta descriptions<small>Fix: add short page summaries</small></span></li>
+      </ul>
+      <div class="report-foot" aria-hidden="true">+ full checklist, screenshots and next steps</div>
+    </div>
+  </div>
+</section>
+
+<section class="trust" aria-label="Highlights">
+  <div class="wrap">
+    <div class="trust-item"><div class="trust-big">6+ years</div><div class="trust-small">fixing WordPress &amp; WooCommerce</div></div>
+    <div class="trust-item"><div class="trust-big stars-trust" role="img" aria-label="5 out of 5 stars">★★★★★</div><div class="trust-small">rated by every client</div></div>
+    <div class="trust-item"><div class="trust-big">30+ checks</div><div class="trust-small">across 6 areas of your site</div></div>
+    <div class="trust-item"><div class="trust-big">$0</div><div class="trust-small">no card, no obligation</div></div>
+  </div>
+</section>
+
+<section class="section" id="checks">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="stack">
+        <div class="label">What's checked</div>
+        <h2 class="h2">Six areas that decide if your site sells.</h2>
+      </div>
+      <p class="section-note">Most audits stop at a speed score. This one checks the things that actually lose you leads and orders.</p>
+    </div>
+    <div class="checks">
+      <div class="check">
+        <div class="check-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
+        <h3>Speed &amp; Core Web Vitals</h3>
+        <p>How fast your pages load on real phones, and what is slowing them down.</p>
+        <ul><li>Load time and Core Web Vitals</li><li>Heavy images, scripts and plugins</li><li>Caching and hosting setup</li></ul>
+      </div>
+      <div class="check">
+        <div class="check-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z"/></svg></div>
+        <h3>Security</h3>
+        <p>Signs of malware, risky plugins and open doors before someone else finds them.</p>
+        <ul><li>Outdated core, plugins and themes</li><li>Malware and blacklist checks</li><li>SSL, headers and login protection</li></ul>
+      </div>
+      <div class="check">
+        <div class="check-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+        <h3>SEO basics</h3>
+        <p>The technical issues that quietly stop Google from showing your pages.</p>
+        <ul><li>Titles, descriptions and headings</li><li>Indexing, sitemap and redirects</li><li>Broken links and missing pages</li></ul>
+      </div>
+      <div class="check">
+        <div class="check-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+        <h3>Mobile experience</h3>
+        <p>Most visitors arrive on a phone. Does your site work for them?</p>
+        <ul><li>Layout and tap targets</li><li>Text size and readability</li><li>Pop-ups that block content</li></ul>
+      </div>
+      <div class="check">
+        <div class="check-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6.2"/><circle cx="9" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/></svg></div>
+        <h3>Forms &amp; checkout</h3>
+        <p>The places money and leads come in — tested end to end.</p>
+        <ul><li>Contact and quote forms deliver</li><li>WooCommerce cart and checkout</li><li>Payment and email notifications</li></ul>
+      </div>
+      <div class="check">
+        <div class="check-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17V7l8-4 8 4v10l-8 4z"/><path d="M12 12v9M4 7l8 5 8-5"/></svg></div>
+        <h3>Health &amp; backups</h3>
+        <p>The boring things that decide whether a bad day becomes a disaster.</p>
+        <ul><li>PHP version and error logs</li><li>Backups and restore readiness</li><li>Uptime and hosting limits</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="stack">
+        <div class="label">Why this audit</div>
+        <h2 class="h2">Not another automated score.</h2>
+      </div>
+    </div>
+    <div class="compare">
+      <div class="compare-col bad">
+        <h3>Typical free scanner</h3>
+        <ul>
+          <li>A score and a wall of jargon</li>
+          <li>Hundreds of warnings, no priorities</li>
+          <li>Can't test your forms or checkout</li>
+          <li>You're left to figure out the fixes</li>
+        </ul>
+      </div>
+      <div class="compare-col good">
+        <h3>This audit</h3>
+        <ul>
+          <li>Reviewed by a developer, not just a tool</li>
+          <li>Top issues ranked by business impact</li>
+          <li>Forms, checkout and emails actually tested</li>
+          <li>Each issue comes with a clear fix</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark" id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="stack">
+        <div class="label">How it works</div>
+        <h2 class="h2">Three steps. Nothing to install.</h2>
+      </div>
+    </div>
+    <ol class="steps steps-3">
+      <li class="step"><span class="step-num">01</span><h3>Send your URL</h3><p>Fill in the short form below. No login or admin access needed for the audit.</p></li>
+      <li class="step"><span class="step-num">02</span><h3>I run the audit</h3><p>Automated checks plus a hands-on review of your pages, forms and checkout.</p></li>
+      <li class="step"><span class="step-num">03</span><h3>Get your report</h3><p>A clear report by email with the top issues and how to fix each one. Fix it yourself or ask me to.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="results">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="stack">
+        <div class="label">From audit to fix</div>
+        <h2 class="h2">What finding the real cause looks like.</h2>
+      </div>
+      <p class="section-note">An audit is where these fixes start. Client names are withheld for privacy.</p>
+    </div>
+    <div class="cases">
+
+      <article class="case">
+        <div class="case-top"><span class="case-num">Case 01</span><span class="chip">Site down</span></div>
+        <h3>WooCommerce store went to a white screen overnight</h3>
+        <div class="shot code" role="img" aria-label="Server error log showing a PHP fatal error from an outdated plugin">
+<pre aria-hidden="true"><span class="t-p">$</span> tail wp-content/debug.log
+<span class="t-err">PHP Fatal error: Uncaught Error:
+Call to undefined function
+create_function() in
+/plugins/legacy-slider/init.php:42</span>
+<span class="t-dim"># host upgraded PHP 7.4 → 8.1</span>
+<span class="t-ok">✓ plugin disabled over SSH · site up</span></pre>
+        </div>
+        <dl>
+          <div><dt>Situation</dt><dd>Customers saw a blank white page and the owner couldn't log in to wp-admin. Every hour down meant lost orders.</dd></div>
+          <div><dt>What I found</dt><dd>The host had silently upgraded PHP to 8.1. An old, abandoned slider plugin used a function removed in PHP 8, and the fatal error took the whole site down.</dd></div>
+          <div><dt>What I did</dt><dd>Took a backup, disabled the plugin over SSH to bring the site back, then replaced it with a maintained alternative on staging and tested checkout before going live.</dd></div>
+          <div class="result"><dt>Result</dt><dd>Store back online the same day, and the rest of the site checked for PHP 8 issues so it doesn't happen again.</dd></div>
+        </dl>
+      </article>
+
+      <article class="case">
+        <div class="case-top"><span class="case-num">Case 02</span><span class="chip">Hacked / malware</span></div>
+        <h3>Visitors from Google were redirected to spam sites</h3>
+        <div class="shot code" role="img" aria-label="Terminal showing a hidden PHP backdoor found in the uploads folder">
+<pre aria-hidden="true"><span class="t-p">$</span> find wp-content/uploads -name "*.php"
+<span class="t-err">uploads/2024/03/cache-img.php</span>
+<span class="t-p">$</span> head -c 60 cache-img.php
+<span class="t-err">&lt;?php @eval(base64_decode($_POST[...</span>
+<span class="t-dim"># backdoor + rogue admin user</span>
+<span class="t-ok">✓ removed · entry point closed</span></pre>
+        </div>
+        <dl>
+          <div><dt>Situation</dt><dd>The owner's own visits looked normal, but customers arriving from Google on mobile were sent to spam pages. Google had started showing a warning.</dd></div>
+          <div><dt>What I found</dt><dd>Injected JavaScript in the theme, a PHP backdoor hidden in the uploads folder, and a fake admin account. The way in was an outdated plugin with a known upload vulnerability.</dd></div>
+          <div><dt>What I did</dt><dd>Backed up, removed the malware and backdoor, replaced WordPress core files, deleted the rogue admin, reset passwords and keys, blocked PHP in uploads, updated everything, and requested a Google review.</dd></div>
+          <div class="result"><dt>Result</dt><dd>Site clean, Google warning removed after review, and the hole they used is closed.</dd></div>
+        </dl>
+      </article>
+
+      <article class="case">
+        <div class="case-top"><span class="case-num">Case 03</span><span class="chip">WooCommerce build</span></div>
+        <h3>Smarter checkout for a cash-on-delivery store</h3>
+        <div class="shot code" role="img" aria-label="PHP code validating Bangladeshi phone numbers at WooCommerce checkout">
+<pre aria-hidden="true"><span class="t-dim">// custom plugin — survives updates</span>
+<span class="t-hi">add_action</span>( 'woocommerce_after_checkout_validation',
+  'bd_validate_phone', 10, 2 );
+
+<span class="t-hi">if</span> ( ! preg_match( '/^01[3-9]\d{8}$/', $phone ) ) {
+  $errors-&gt;add( 'phone',
+    'Enter a valid mobile number.' );
+}</pre>
+        </div>
+        <dl>
+          <div><dt>Situation</dt><dd>A local store selling on cash-on-delivery kept getting orders with wrong or fake phone numbers, and delivery was charged the same inside and outside Dhaka.</dd></div>
+          <div><dt>What I found</dt><dd>Checkout accepted any text as a phone number, and the existing plugins couldn't set delivery charges by area without adding more bloat.</dd></div>
+          <div><dt>What I did</dt><dd>Built a small custom plugin: phone number validation at checkout and area-based delivery charges. Tested on staging, written to survive theme and plugin updates.</dd></div>
+          <div class="result"><dt>Result</dt><dd>Fewer undeliverable orders, and customers are charged the right delivery fee automatically.</dd></div>
+        </dl>
+      </article>
+
+    </div>
+  
+  </div>
+</section>
+
+<section class="reviews" aria-labelledby="reviews-title">
+  <div class="wrap">
+    <div class="reviews-head">
+      <h2 id="reviews-title">What clients said</h2>
+      <div class="stars stars-lg" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+    </div>
+    <div class="quotes">
+      <figure class="quote">
+        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+        <blockquote>“Imtiaz is absolutely awesome to work with. Very knowledgeable and does the work in record time. Highly recommended, especially with WordPress.”</blockquote>
+        <figcaption>— markdenny887</figcaption>
+      </figure>
+      <figure class="quote">
+        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+        <blockquote>“Very good! He had clear communication and responded quickly. He was very quick and helpful. I would definitely order again.”</blockquote>
+        <figcaption>— eftarabic</figcaption>
+      </figure>
+      <figure class="quote">
+        <div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+        <blockquote>“Awesome experience. Fast and friendly. Does great work and will use again!”</blockquote>
+        <figcaption>— danib254</figcaption>
+      </figure>
+    </div>
+  
+  </div>
+</section>
+
+<section class="cta" id="audit-form">
+  <div class="wrap">
+    <div class="cta-copy">
+      <h2>Get your <span class="hl">free site audit.</span></h2>
+      <p>Tell me where to look. You'll get your report by email, usually within 48 hours.</p>
+      <ul class="hero-points">
+        <li>No admin access or passwords needed</li>
+        <li>No obligation to hire me</li>
+        <li>Your details are never shared</li>
+      </ul>
+      <p class="cta-alt">Prefer email? Write to <a href="mailto:dewan.imtiaz01@gmail.com">dewan.imtiaz01@gmail.com</a></p>
+    </div>
+    <form class="form" id="contact-form" action="https://formsubmit.co/dewan.imtiaz01@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New site audit request">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="source" value="audit page">
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="field"><label for="f-url">Website URL</label><input id="f-url" name="website" type="text" inputmode="url" placeholder="yourstore.com" required></div>
+      <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+      <div class="field"><label for="f-email">Email for the report</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="f-type">What kind of site?</label>
+        <select id="f-type" name="site_type"><option>Business / service site</option><option>WooCommerce store</option><option>Directory or membership</option><option>Blog or content site</option><option>Other</option></select></div>
+      <div class="field"><label for="f-msg">Anything specific worrying you? <span class="opt">(optional)</span></label><textarea id="f-msg" name="message" rows="3" placeholder="slow on mobile, fewer leads lately"></textarea></div>
+      <button class="btn btn-submit" type="submit">Get my free audit</button>
+      <p class="form-note">One report per site. I'll only email you about your audit.</p>
+      <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="stack">
+        <div class="label">Questions</div>
+        <h2 class="h2">Before you ask.</h2>
+      </div>
+    </div>
+    <div class="faq">
+      <details><summary>Is it really free?</summary><p>Yes. The audit and report cost nothing and there's no obligation. If you'd like help fixing what I find, I'll quote separately — and you're free to fix it yourself or hand the report to your own developer.</p></details>
+      <details><summary>Do you need my WordPress login?</summary><p>No. The audit is done from the outside, the way visitors and Google see your site. Access is only needed later if you hire me to fix something, and a backup always comes first.</p></details>
+      <details><summary>How long does it take?</summary><p>Usually within 48 hours of your request. Larger stores can take a little longer — I'll tell you if so.</p></details>
+      <details><summary>My site isn't WordPress. Can you still audit it?</summary><p>The speed, SEO, mobile and form checks work on most sites. The deeper checks are built for WordPress and WooCommerce, which is where I can help the most.</p></details>
+      <details><summary>What happens after I get the report?</summary><p>Nothing, unless you want it to. Many owners fix the quick wins themselves. If you'd like me to handle it, reply to the report email and I'll send a fixed quote.</p></details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer" id="contact">
+  <div class="wrap">
+    <div class="footer-main">
+      <h2>Let's get your site <span class="hl">working.</span></h2>
+      <ul class="contacts">
+        <li><a href="mailto:dewan.imtiaz01@gmail.com"><span>Email</span><span>dewan.imtiaz01@gmail.com</span></a></li>
+        <!-- WHATSAPP (hidden until you have the number): replace 8801XXXXXXXXX with your number (880 + number without the leading 0),
+             set the display text, then delete the comment marks around the line to show it.
+        <li><a href="https://wa.me/8801XXXXXXXXX" target="_blank" rel="noopener"><span>WhatsApp</span><span>+880 1XXX-XXXXXX</span></a></li>
+        -->
+        <li><a href="https://www.linkedin.com/in/dewan-imtiaz-been-emran/" target="_blank" rel="noopener"><span>LinkedIn</span><span>Dewan Imtiaz</span></a></li>
+        <!-- FIVERR (hidden until you add your username): replace your-username, then delete the comment marks.
+        <li><a href="https://www.fiverr.com/your-username" target="_blank" rel="noopener"><span>Fiverr</span><span>fiverr.com/your-username</span></a></li>
+        -->
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Dewan · Dhaka, Bangladesh · Working with clients worldwide</span>
+      <span>Usually replies within 24 hours</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var f=document.getElementById('contact-form'); if(!f||!window.fetch) return;
+  var st=document.getElementById('form-status'), btn=f.querySelector('button[type=submit]');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(f._honey.value) return;
+    btn.disabled=true; btn.textContent='Sending…'; st.className='form-status'; st.textContent='';
+    fetch('https://formsubmit.co/ajax/dewan.imtiaz01@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
+      .then(function(r){return r.json();})
+      .then(function(d){
+        if(String(d.success)==='true'){ f.reset(); st.className='form-status ok'; st.textContent='Thanks — your request is in. I\'ll reply by email within 24 hours.'; }
+        else throw new Error();
+      })
+      .catch(function(){
+        st.className='form-status err';
+        st.innerHTML='That didn\'t go through. Please email me directly at <a href="mailto:dewan.imtiaz01@gmail.com">dewan.imtiaz01@gmail.com</a>.';
+      })
+      .finally(function(){ btn.disabled=false; btn.textContent='Get my free audit'; });
+  });
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ee9e5c519c6349d0b04fe9ce68f59a76"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
