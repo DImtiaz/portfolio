@@ -901,7 +901,8 @@ h1,h2,h3,p{overflow-wrap:break-word}
 (function () {
   var CASES = [{"no": "01", "tag": "Server crash", "pre": "Server crashed for hours when high traffic hit a ", "hl": "1 Million", "post": " URL directory site", "title": "Server crashed for hours when high traffic hit a 1 Million URL directory site", "host": "directory-site", "before": "Hours of downtime · PHP workers stuck for 900s", "after": "30s one-time build · Zero server errors", "steps": ["Crash pattern traced over SSH", "Bot hits matched to sitemap rebuilds", "Object cache trigger fixed", "Sitemap rebuilt to generate once and update incrementally"], "situation": "Every time search engine bots crawled the site for indexing, it went down with server timeout errors, often for several hours at a time. This kept happening, so the site was unreliable for visitors and was failing the crawls it needed to get indexed.", "found": "The site had over 1 million URLs, and its custom-built sitemap was regenerated from scratch on every request because an object cache trigger wasn’t working. The PHP-FPM timeout was set to 900 seconds, so each clogged sitemap request held a PHP worker for up to 15 minutes. A few bot hits used up every worker, and the whole server stopped responding.", "did": "I debugged at the server level over the shell. I traced when the crashes happened, which requests triggered them and where in the code the load came from. Then I fixed the object cache trigger and rebuilt the sitemap generation. Now it builds once, and after that it only adds new entries when new content is published.", "result": "The sitemap builds once in about 30 seconds and then updates incrementally as new content is added. The site went from hours of downtime on every crawl to zero server errors since the fix.", "log": ""}, {"no": "02", "tag": "Site down", "title": "WooCommerce store went to a white screen overnight", "host": "store-client", "before": "White screen · wp-admin locked", "after": "Online same day · PHP 8 ready", "steps": ["Backup taken", "Broken plugin disabled over SSH", "Replacement tested on staging", "Checkout verified live"], "situation": "Customers saw a blank white page and the owner couldn't log in to wp-admin. Every hour down meant lost orders.", "found": "The host had silently upgraded PHP to 8.1. An old, abandoned slider plugin used a function removed in PHP 8, and the fatal error took the whole site down.", "did": "Took a backup, disabled the plugin over SSH to bring the site back, then replaced it with a maintained alternative on staging and tested checkout before going live.", "result": "Store back online the same day, and the rest of the site checked for PHP 8 issues so it doesn't happen again.", "log": "$ tail wp-content/debug.log\nPHP Fatal error: Uncaught Error:\nCall to undefined function\ncreate_function() in\n/plugins/legacy-slider/init.php:42\n# host upgraded PHP 7.4 → 8.1\n✓ plugin disabled over SSH · site up"}, {"no": "03", "tag": "Hacked / malware", "title": "Visitors from Google were redirected to spam sites", "host": "client-site", "before": "Spam redirects · Google warning", "after": "Clean · warning removed", "steps": ["Backup taken", "Malware and backdoor removed", "Core files, passwords and keys replaced", "Google review requested"], "situation": "The owner's own visits looked normal, but customers arriving from Google on mobile were sent to spam pages. Google had started showing a warning.", "found": "Injected JavaScript in the theme, a PHP backdoor hidden in the uploads folder, and a fake admin account. The way in was an outdated plugin with a known upload vulnerability.", "did": "Backed up, removed the malware and backdoor, replaced WordPress core files, deleted the rogue admin, reset passwords and keys, blocked PHP in uploads, updated everything, and requested a Google review.", "result": "Site clean, Google warning removed after review, and the hole they used is closed.", "log": "$ find wp-content/uploads -name \"*.php\"\nuploads/2024/03/cache-img.php\n$ head -c 60 cache-img.php\n<?php @eval(base64_decode($_POST[...\n# backdoor + rogue admin user\n✓ removed · entry point closed"}, {"no": "04", "tag": "WooCommerce build", "title": "Smarter checkout for a cash-on-delivery store", "host": "cod-store", "before": "Fake numbers · one flat delivery fee", "after": "Valid numbers · fee by area", "steps": ["Checkout rules mapped", "Custom plugin built", "Tested on staging", "Live and update-safe"], "situation": "A local store selling on cash-on-delivery kept getting orders with wrong or fake phone numbers, and delivery was charged the same inside and outside Dhaka.", "found": "Checkout accepted any text as a phone number, and the existing plugins couldn't set delivery charges by area without adding more bloat.", "did": "Built a small custom plugin: phone number validation at checkout and area-based delivery charges. Tested on staging, written to survive theme and plugin updates.", "result": "Fewer undeliverable orders, and customers are charged the right delivery fee automatically.", "log": "// custom plugin — survives updates\nadd_action(\n'woocommerce_after_checkout_validation',\n  'bd_validate_phone', 10, 2 );\n\nif ( ! preg_match( '/^01[3-9]\\d{8}$/', $phone ) ) {\n  $errors->add( 'phone',\n    'Enter a valid mobile number.' );\n}"}];
   var REVIEWS = [{"quote": "Imtiaz is absolutely awesome to work with. Very knowledgeable and does the work in record time. Highly recommended, especially with WordPress.", "name": "markdenny887", "role": "Verified client via Fiverr · ★★★★★"}, {"quote": "Very good! He had clear communication and responded quickly. He was very quick and helpful. I would definitely order again.", "name": "eftarabic", "role": "Verified client · ★★★★★"}, {"quote": "Awesome experience. Fast and friendly. Does great work and will use again!", "name": "danib254", "role": "Verified client · ★★★★★"}];
-  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/dewan.imtiaz01@gmail.com';
+  var WEB3FORMS_KEY = '340e0358-2d78-47ed-8a43-f05660ae5550';   // main form service (web3forms.com)
+  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/dewan.imtiaz01@gmail.com'; // backup service
   var MY_EMAIL = 'dewan.imtiaz01@gmail.com';
   var FORM_ACTION = 'https://formsubmit.co/' + MY_EMAIL;
 
@@ -994,7 +995,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
   });
 
   /* ---------- Contact form ----------
-     Sends to FormSubmit. Shows "Thanks" only when FormSubmit confirms.
+     Sends to Web3Forms (backup: FormSubmit). Shows "Thanks" only when FormSubmit confirms.
      If sending fails twice, the visitor's email app opens with the
      message ready, so no lead is lost. */
   var form = $('#lead-form'), btn = $('#lead-submit'), errBox = $('#form-error'), sentBox = $('#form-sent');
@@ -1010,7 +1011,26 @@ h1,h2,h3,p{overflow-wrap:break-word}
     });
     return !Object.keys(e).length;
   }
-  function send(fd) {
+  /* Main service: Web3Forms */
+  function sendWeb3(v) {
+    var fd = new FormData();
+    fd.append('access_key', WEB3FORMS_KEY);
+    fd.append('subject', 'New site check request from your portfolio');
+    fd.append('from_name', 'Portfolio — ' + v.name);
+    fd.append('replyto', v.email);
+    fd.append('name', v.name); fd.append('email', v.email);
+    fd.append('website', v.website); fd.append('message', v.message);
+    return fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { Accept: 'application/json' }, body: fd })
+      .then(function (res) { return res.json().catch(function () { return {}; }); })
+      .then(function (d) { if (!d.success) { console.warn('Web3Forms response:', d); throw 0; } });
+  }
+  /* Backup service: FormSubmit */
+  function sendFormSubmit(v) {
+    var fd = new FormData();
+    fd.append('name', v.name); fd.append('email', v.email);
+    fd.append('website', v.website); fd.append('message', v.message);
+    fd.append('_subject', 'New site check request from your portfolio');
+    fd.append('_template', 'table');
     return fetch(FORM_ENDPOINT, { method: 'POST', headers: { Accept: 'application/json' }, body: fd })
       .then(function (res) { if (!res.ok) { console.warn('FormSubmit HTTP', res.status); throw 0; } return res.json().catch(function () { return {}; }); })
       .then(function (d) { if (String(d.success) !== 'true') { console.warn('FormSubmit response:', d); throw 0; } });
@@ -1020,33 +1040,24 @@ h1,h2,h3,p{overflow-wrap:break-word}
     errBox.hidden = true;
     if (!check()) return;
     var f = form.elements;
-    var fd = new FormData();
-    fd.append('name', f.name.value.trim());
-    fd.append('email', f.email.value.trim());
-    fd.append('website', f.url.value.trim());
-    fd.append('message', f.details.value.trim());
-    fd.append('_subject', 'New site check request from your portfolio');
-    fd.append('_template', 'table');
+    var v = { name: f.name.value.trim(), email: f.email.value.trim(), website: f.url.value.trim(), message: f.details.value.trim() };
     btn.disabled = true; btn.style.opacity = .6; btn.textContent = 'Sending…';
-    send(fd)
-      .catch(function () { return new Promise(function (r) { setTimeout(r, 1500); }).then(function () { return send(fd); }); })
+    /* Try Web3Forms → retry once → FormSubmit → email app */
+    sendWeb3(v)
+      .catch(function () { return new Promise(function (r) { setTimeout(r, 1200); }).then(function () { return sendWeb3(v); }); })
+      .catch(function () { return sendFormSubmit(v); })
       .then(function () {
         $('#sent-name').textContent = f.name.value.trim().split(' ')[0];
         $('#sent-email').textContent = f.email.value.trim();
         form.hidden = true; sentBox.hidden = false;
       })
       .catch(function () {
-        /* Background send failed: post the form the classic way instead.
-           The browser goes to FormSubmit, which delivers the lead and
-           sends the visitor back here with ?sent=1. */
-        sessionStorage && (function () { try { sessionStorage.setItem('leadName', f.name.value.trim().split(' ')[0]); sessionStorage.setItem('leadEmail', f.email.value.trim()); } catch (e) {} })();
-        var post = document.createElement('form');
-        post.method = 'POST'; post.action = FORM_ACTION; post.style.display = 'none';
-        var fields = { name: f.name.value.trim(), email: f.email.value.trim(), website: f.url.value.trim(), message: f.details.value.trim(),
-          _subject: 'New site check request from your portfolio', _template: 'table', _captcha: 'false',
-          _next: location.href.split('#')[0].split('?')[0] + '?sent=1#contact' };
-        Object.keys(fields).forEach(function (k) { var i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = fields[k]; post.appendChild(i); });
-        document.body.appendChild(post); post.submit();
+        /* Sending failed: open the visitor's email app with the message ready,
+           so the lead still reaches you. */
+        errBox.textContent = "Couldn't send automatically, so your email app is opening with your message ready. Or email " + MY_EMAIL + '.';
+        errBox.hidden = false;
+        var body = 'Name: ' + f.name.value + '\nEmail: ' + f.email.value + '\nWebsite: ' + f.url.value + '\n\n' + f.details.value;
+        window.location.href = 'mailto:' + MY_EMAIL + '?subject=' + encodeURIComponent('Website enquiry from ' + f.name.value) + '&body=' + encodeURIComponent(body);
       })
       .then(function () { btn.disabled = false; btn.style.opacity = 1; btn.textContent = 'Send request'; });
   });
