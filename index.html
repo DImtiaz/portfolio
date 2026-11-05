@@ -903,6 +903,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
   var REVIEWS = [{"quote": "Imtiaz is absolutely awesome to work with. Very knowledgeable and does the work in record time. Highly recommended, especially with WordPress.", "name": "markdenny887", "role": "Verified client via Fiverr · ★★★★★"}, {"quote": "Very good! He had clear communication and responded quickly. He was very quick and helpful. I would definitely order again.", "name": "eftarabic", "role": "Verified client · ★★★★★"}, {"quote": "Awesome experience. Fast and friendly. Does great work and will use again!", "name": "danib254", "role": "Verified client · ★★★★★"}];
   var FORM_ENDPOINT = 'https://formsubmit.co/ajax/dewan.imtiaz01@gmail.com';
   var MY_EMAIL = 'dewan.imtiaz01@gmail.com';
+  var FORM_ACTION = 'https://formsubmit.co/' + MY_EMAIL;
 
   function $(s, el) { return (el || document).querySelector(s); }
   function $$(s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); }
@@ -1035,13 +1036,29 @@ h1,h2,h3,p{overflow-wrap:break-word}
         form.hidden = true; sentBox.hidden = false;
       })
       .catch(function () {
-        errBox.textContent = "Couldn't send automatically, so your email app is opening with your message ready. Or email " + MY_EMAIL + '.';
-        errBox.hidden = false;
-        var body = 'Name: ' + f.name.value + '\nEmail: ' + f.email.value + '\nWebsite: ' + f.url.value + '\n\n' + f.details.value;
-        window.location.href = 'mailto:' + MY_EMAIL + '?subject=' + encodeURIComponent('Website enquiry from ' + f.name.value) + '&body=' + encodeURIComponent(body);
+        /* Background send failed: post the form the classic way instead.
+           The browser goes to FormSubmit, which delivers the lead and
+           sends the visitor back here with ?sent=1. */
+        sessionStorage && (function () { try { sessionStorage.setItem('leadName', f.name.value.trim().split(' ')[0]); sessionStorage.setItem('leadEmail', f.email.value.trim()); } catch (e) {} })();
+        var post = document.createElement('form');
+        post.method = 'POST'; post.action = FORM_ACTION; post.style.display = 'none';
+        var fields = { name: f.name.value.trim(), email: f.email.value.trim(), website: f.url.value.trim(), message: f.details.value.trim(),
+          _subject: 'New site check request from your portfolio', _template: 'table', _captcha: 'false',
+          _next: location.href.split('#')[0].split('?')[0] + '?sent=1#contact' };
+        Object.keys(fields).forEach(function (k) { var i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = fields[k]; post.appendChild(i); });
+        document.body.appendChild(post); post.submit();
       })
       .then(function () { btn.disabled = false; btn.style.opacity = 1; btn.textContent = 'Send request'; });
   });
+  /* Back from FormSubmit after a classic post: show the thank-you message */
+  if (/[?&]sent=1/.test(location.search) && form) {
+    var n = '', em = '';
+    try { n = sessionStorage.getItem('leadName') || ''; em = sessionStorage.getItem('leadEmail') || ''; } catch (e) {}
+    $('#sent-name').textContent = n || 'for your request';
+    $('#sent-email').textContent = em || 'your email';
+    form.hidden = true; sentBox.hidden = false;
+    if (history.replaceState) history.replaceState(null, '', location.pathname + '#contact');
+  }
   var again = $('[data-on-click="reset"]');
   if (again) again.addEventListener('click', function () { form.reset(); sentBox.hidden = true; form.hidden = false; });
 })();
