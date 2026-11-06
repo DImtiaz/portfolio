@@ -855,6 +855,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
     
     
       <form id="lead-form" action="https://formsubmit.co/dewan.imtiaz01@gmail.com" method="POST" novalidate style="display:grid;gap:18px">
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <label style="display:grid;gap:10px"><span style="font-family:Montserrat,sans-serif;font-size:15px;font-weight:500;color:#FFFFFF">Your name</span>
           <input class="x44" name="name" autocomplete="name" style="background:#050807;border-radius:12px;color:#FFFFFF;padding:16px 18px;font-size:15px;outline:none;border:1px solid rgba(255,255,255,.15)">
           <span id="err-name" style="font-size:12px;color:#FF9C8A;min-height:14px"></span></label>
@@ -1000,6 +1001,25 @@ h1,h2,h3,p{overflow-wrap:break-word}
      message ready, so no lead is lost. */
   var form = $('#lead-form'), btn = $('#lead-submit'), errBox = $('#form-error'), sentBox = $('#form-sent');
   var OK_LINE = 'rgba(255,255,255,.15)', BAD_LINE = '#FF9C8A';
+  /* ---------- Spam protection ----------
+     1. Honeypot: a hidden "botcheck" box people never see; bots tick it.
+     2. Time trap: real people take more than 4 seconds to fill the form.
+     3. Rate limit: max 3 sends from one browser in 10 minutes.
+     Spam is silently "accepted" so bots don't learn they were blocked. */
+  var loadedAt = Date.now();
+  function looksLikeSpam(f) {
+    if (f.botcheck && f.botcheck.checked) return true;
+    if (Date.now() - loadedAt < 4000) return true;
+    return false;
+  }
+  function overLimit() {
+    try {
+      var now = Date.now(), log = JSON.parse(localStorage.getItem('leadSends') || '[]').filter(function (t) { return now - t < 600000; });
+      if (log.length >= 3) return true;
+      log.push(now); localStorage.setItem('leadSends', JSON.stringify(log));
+    } catch (e) {}
+    return false;
+  }
   function check() {
     var f = form.elements, e = {};
     if (!f.name.value.trim()) e.name = 'Please add your name.';
@@ -1015,6 +1035,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
   function sendWeb3(v) {
     var fd = new FormData();
     fd.append('access_key', WEB3FORMS_KEY);
+    fd.append('botcheck', '');
     fd.append('subject', 'New site check request from your portfolio');
     fd.append('from_name', 'Portfolio — ' + v.name);
     fd.append('replyto', v.email);
@@ -1040,6 +1061,8 @@ h1,h2,h3,p{overflow-wrap:break-word}
     errBox.hidden = true;
     if (!check()) return;
     var f = form.elements;
+    if (looksLikeSpam(f)) { form.hidden = true; sentBox.hidden = false; return; }
+    if (overLimit()) { errBox.textContent = 'You have sent a few requests already. Please wait a few minutes, or email ' + MY_EMAIL + '.'; errBox.hidden = false; return; }
     var v = { name: f.name.value.trim(), email: f.email.value.trim(), website: f.url.value.trim(), message: f.details.value.trim() };
     btn.disabled = true; btn.style.opacity = .6; btn.textContent = 'Sending…';
     /* Try Web3Forms → retry once → FormSubmit → email app */

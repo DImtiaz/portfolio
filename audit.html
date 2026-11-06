@@ -649,7 +649,7 @@ create_function() in
       <p class="cta-alt">Prefer email? Write to <a href="mailto:dewan.imtiaz01@gmail.com">dewan.imtiaz01@gmail.com</a></p>
     </div>
     <form class="form" id="contact-form">
-      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="field"><label for="f-url">Website URL</label><input id="f-url" name="website" type="text" inputmode="url" placeholder="yourstore.com" required></div>
       <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
       <div class="field"><label for="f-email">Email for the report</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
@@ -725,6 +725,7 @@ create_function() in
   function sendWeb3(v) {
     var fd = new FormData();
     fd.append('access_key', WEB3FORMS_KEY);
+    fd.append('botcheck', '');
     fd.append('subject', SUBJECT);
     fd.append('from_name', 'Audit page — ' + v.name);
     fd.append('replyto', v.email);
@@ -738,10 +739,24 @@ create_function() in
     return post('https://formsubmit.co/ajax/' + MY_EMAIL, fd).then(function (d) { if (String(d.success) !== 'true') { console.warn('FormSubmit response:', d); throw 0; } });
   }
 
+  /* Spam protection: hidden "botcheck" box (bots tick it), a 4-second time trap,
+     and max 3 sends per browser in 10 minutes. Spam gets a fake "thanks". */
+  var loadedAt = Date.now();
+  function fakeThanks() { form.reset(); status.className = 'form-status ok'; status.textContent = "Thanks — your audit request is in."; }
+  function overLimit() {
+    try {
+      var now = Date.now(), log = JSON.parse(localStorage.getItem('auditSends') || '[]').filter(function (t) { return now - t < 600000; });
+      if (log.length >= 3) return true;
+      log.push(now); localStorage.setItem('auditSends', JSON.stringify(log));
+    } catch (e) {}
+    return false;
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (form._honey && form._honey.value) return;          // spam bot
+    if (form.botcheck.checked || Date.now() - loadedAt < 4000) { fakeThanks(); return; }
     if (!form.checkValidity()) { form.reportValidity(); return; }
+    if (overLimit()) { status.className = 'form-status err'; status.textContent = 'You have sent a few requests already. Please wait a few minutes, or email ' + MY_EMAIL + '.'; return; }
     var v = {
       website: form.website.value.trim(),
       name: form.name.value.trim(),
